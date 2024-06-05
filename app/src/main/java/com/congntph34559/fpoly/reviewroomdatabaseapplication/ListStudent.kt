@@ -33,8 +33,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.Navigator
 import androidx.navigation.compose.rememberNavController
@@ -82,15 +86,17 @@ fun GetLayoutHomeScreen(navController: NavHostController) {
 
 
     Column {
-        Button(onClick = {
-            db.studentDAO().insert(
-                StudentModel(hoTen = "Nam", maSv = "PH23445", diemTB = 9f)
-            )
-            list = db.studentDAO().getAll()
-        }) {
-            Text(text = "Insert")
-        }
 
+        Text(
+            text = "List student",
+            fontFamily = FontFamily.Serif,
+            fontWeight = FontWeight(600),
+            fontSize = 20.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 20.dp),
+            textAlign = TextAlign.Center
+        )
 
         Column(
             modifier = Modifier
@@ -120,14 +126,26 @@ fun GetLayoutHomeScreen(navController: NavHostController) {
                             modifier = Modifier.weight(1f),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(text = it.uId.toString())
+                            Text(
+                                text = it.uId.toString(),
+                                fontFamily = FontFamily.Serif
+                            )
                             Spacer(modifier = Modifier.width(20.dp))
                             Column(
 
                             ) {
-                                Text(text = "Họ tên: ${it.hoTen}")
-                                Text(text = "MSV: ${it.maSv}")
-                                Text(text = "DiemTB: ${it.diemTB}")
+                                Text(
+                                    text = "Họ tên: ${it.hoTen}",
+                                    fontFamily = FontFamily.Serif
+                                )
+                                Text(
+                                    text = "MSV: ${it.maSv}",
+                                    fontFamily = FontFamily.Serif
+                                )
+                                Text(
+                                    text = "DiemTB: ${it.diemTB}",
+                                    fontFamily = FontFamily.Serif
+                                )
                             }
                         }
                         Row(
@@ -178,9 +196,14 @@ fun GetLayoutHomeScreen(navController: NavHostController) {
                 navController.navigate(ROUTE.insert.name) {
                     popUpTo(ROUTE.list.name) { inclusive = true }
                 }
-            }
+            },
+            containerColor = Color.Black,
         ) {
-            Icon(imageVector = Icons.Default.Add, contentDescription = null)
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = null,
+                tint = Color.White
+            )
         }
     }
 }

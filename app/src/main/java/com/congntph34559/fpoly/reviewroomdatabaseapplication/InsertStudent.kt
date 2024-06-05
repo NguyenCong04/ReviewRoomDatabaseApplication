@@ -165,34 +165,43 @@ fun GetLayoutInsertStudent(navController: NavHostController) {
         Spacer(modifier = Modifier.height(20.dp))
         Button(
             onClick = {
-                if (
-                    nameSv.isNotBlank()
-                    && maSv.isNotBlank()
-                    && diemTb.isNotBlank()
-                ) {
-                    db.studentDAO().insert(
-                        StudentModel(
-                            hoTen = nameSv,
-                            maSv = maSv,
-                            diemTB = diemTb.toFloat()
+                try {
+                    if (
+                        nameSv.isNotBlank()
+                        && maSv.isNotBlank()
+                        && diemTb.isNotBlank()
+                    ) {
+                        db.studentDAO().insert(
+                            StudentModel(
+                                hoTen = nameSv,
+                                maSv = maSv,
+                                diemTB = diemTb.toFloat()
+                            )
                         )
-                    )
-                    Toast.makeText(
-                        context,
-                        "Insert student successfully",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    navController.navigate(ROUTE.list.name) {
-                        popUpTo(ROUTE.insert.name) { inclusive = true }
-                    }
+                        Toast.makeText(
+                            context,
+                            "Insert student successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        navController.navigate(ROUTE.list.name) {
+                            popUpTo(ROUTE.insert.name) { inclusive = true }
+                        }
 
-                } else {
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Please enter information",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }catch (e:NumberFormatException){
                     Toast.makeText(
                         context,
-                        "Please enter information",
+                        "Điểm phải là số",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
             },
             modifier = Modifier
                 .fillMaxWidth()

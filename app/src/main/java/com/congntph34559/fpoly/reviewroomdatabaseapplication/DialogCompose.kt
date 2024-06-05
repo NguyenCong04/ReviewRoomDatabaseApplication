@@ -75,7 +75,10 @@ fun DialogCompose(
                         ),
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text(text = "Close")
+                        Text(
+                            text = "Close",
+                            fontFamily = FontFamily.Serif
+                        )
                     }
                     Button(
                         onClick = onConfim,
@@ -88,7 +91,10 @@ fun DialogCompose(
                             .padding(start = 10.dp)
 
                     ) {
-                        Text(text = "Confim")
+                        Text(
+                            text = "Confim",
+                            fontFamily = FontFamily.Serif
+                        )
                     }
                 }
 
